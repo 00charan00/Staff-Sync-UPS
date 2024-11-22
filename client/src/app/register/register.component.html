@@ -1,13 +1,19 @@
+<!-- register.component.html -->
 <div class="register-container">
-    <h2>Register</h2>
-    <form>
-      <label for="name">Name:</label>
-      <input id="name" type="text" placeholder="Enter your name" />
-      <label for="email">Email:</label>
-      <input id="email" type="email" placeholder="Enter your email" />
-      <label for="password">Password:</label>
-      <input id="password" type="password" placeholder="Enter your password" />
-      <button type="button" (click)="register()">Register</button>
-    </form>
-  </div>
-  
+  <h2>Register</h2>
+  <form>
+    <label for="name">Name:</label>
+    <input id="name" type="text" [(ngModel)]="name" placeholder="Enter your name" name="name"/>
+    <label for="email">Email:</label>
+    <input id="email" type="email" [(ngModel)]="email" placeholder="Enter your email" name="email"/>
+    <label for="password">Password:</label>
+    <input id="password" type="password" [(ngModel)]="password" placeholder="Enter your password" name="password"/>
+    <label for="role">Role:</label>
+    <select id="role" [(ngModel)]="role" name="role">
+      <option value="admin">Admin</option>
+      <option value="employee" selected>Employee</option>  <!-- Default value is employee -->
+    </select>
+    <button type="button" (click)="register()">Register</button>
+  </form>
+  <p>Already have an account? <a routerLink="/login">Login here</a></p>
+</div>

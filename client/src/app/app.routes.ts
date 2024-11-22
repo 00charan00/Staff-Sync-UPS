@@ -1,15 +1,15 @@
 import { Routes } from '@angular/router';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { EmpHomeComponent } from './emp-home/emp-home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
-import { EventsComponent } from './events/events.component';
+import {AuthGuard} from './auth.guard';
 
 export const routes: Routes = [
-    {path:'',redirectTo:'home',pathMatch:'full'},
-    {path:'login',component:LoginComponent},
-    {path:'register',component:RegisterComponent},
-    {path:'home',component:HomeComponent},
-    {path:'about',component:AboutComponent},
-    {path:'events',component:EventsComponent},
+  { path: '', component: AdminHomeComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AdminHomeComponent, canActivate: [AuthGuard] },  // Protect admin route
+  { path: 'employee', component: EmpHomeComponent, canActivate: [AuthGuard] },  // Protect employee route
+  { path: '**', redirectTo: '' }
 ];
