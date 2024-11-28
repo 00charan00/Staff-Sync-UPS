@@ -1,6 +1,6 @@
 package com.upsintern.staffsync.service;
 
-import com.upsintern.staffsync.repo.StaffRepo;
+import com.upsintern.staffsync.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 public class StaffDetailsService implements UserDetailsService {
 
     @Autowired
-    StaffRepo staffRepo;
+    StaffRepository staffRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return new StaffDetails(staffRepo.findByStaffEmail(username));
+        return new StaffDetails(staffRepository.findByStaffEmail(username));
     }
 }

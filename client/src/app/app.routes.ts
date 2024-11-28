@@ -8,7 +8,7 @@ import {EventsComponent} from './events/events.component';
 import {AdminGuard} from './guards/admin.guard';
 
 export const routes: Routes = [
-  { path: '', component: AdminHomeComponent },
+  { path: '', component: EmpHomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'about', component: AboutComponent },

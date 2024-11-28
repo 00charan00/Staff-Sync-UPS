@@ -8,11 +8,6 @@
     <input id="email" type="email" [(ngModel)]="email" placeholder="Enter your email" name="email"/>
     <label for="password">Password:</label>
     <input id="password" type="password" [(ngModel)]="password" placeholder="Enter your password" name="password"/>
-    <label for="role">Role:</label>
-    <select id="role" [(ngModel)]="role" name="role">
-      <option value="admin">Admin</option>
-      <option value="employee" selected>Employee</option>  <!-- Default value is employee -->
-    </select>
     <button type="button" (click)="register()">Register</button>
   </form>
   <p>Already have an account? <a routerLink="/login">Login here</a></p>

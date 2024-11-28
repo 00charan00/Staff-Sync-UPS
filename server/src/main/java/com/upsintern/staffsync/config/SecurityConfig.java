@@ -20,7 +20,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         req -> {
                             req.requestMatchers("/staff/del", "/staff/update").hasRole("ADMIN");
-                            req.requestMatchers("/staff/add","/staff/login").permitAll();
+                            req.requestMatchers("/staff/add","/staff/login","/event/addEvent").permitAll();
                         }
                 )
                 .build();
