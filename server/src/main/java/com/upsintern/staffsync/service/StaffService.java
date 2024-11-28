@@ -2,14 +2,15 @@ package com.upsintern.staffsync.service;
 
 import com.upsintern.staffsync.dto.StaffDto;
 import com.upsintern.staffsync.entity.Staff;
+import com.upsintern.staffsync.exception.InvalidDataException;
 import com.upsintern.staffsync.exception.StaffNotFoundException;
 import com.upsintern.staffsync.repo.StaffRepo;
+import com.upsintern.staffsync.responsemodel.LoginRegisterResponse;
 import com.upsintern.staffsync.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.net.PasswordAuthentication;
 
 @Service
 public class StaffService {
@@ -47,6 +48,22 @@ public class StaffService {
         }
         staffRepo.save(staff);
         return "Staff data updated";
+    }
+
+    public LoginRegisterResponse staffLogin(StaffDto staffDto){
+        String mail = staffDto.getStaffEmail();
+        String pass = staffDto.getStaffPass();
+        if(mail != null && !mail.isEmpty() && pass != null && !pass.isEmpty()){
+            boolean isExist = staffRepo.existsByStaffEmail(mail);
+            if(!isExist) throw new StaffNotFoundException("no staff with email id : "+mail);
+            Staff staff = staffRepo.findByStaffEmail(mail);
+            String actualPass = staff.getStaffPass();
+            boolean isValidPass = passwordEncoder.matches(pass, actualPass);
+            if(isValidPass){
+                return new LoginRegisterResponse(staff.getStaffId(),true,staff.getStaffRole());
+            }
+            else throw new InvalidDataException("Incorrect password");
+        }else throw new InvalidDataException("Provide Proper details");
     }
 
 }

@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import {FormsModule} from '@angular/forms';
+import {StaffService} from '../service/staff.service';
+import {RegisterReq, StaffRole} from '../model/register-req';
+import {AuthService} from '../service/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -17,15 +20,28 @@ export class RegisterComponent {
   password: string = '';
   role: string = 'employee'; // To capture admin/employee role selection
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private staffServer:StaffService,private authService:AuthService) {}
 
   register() {
-    if (this.role === 'admin') {
-      this.router.navigate(['/admin']); // Navigate to admin homepage
-    } else if (this.role === 'employee') {
-      this.router.navigate(['/employee']); // Navigate to employee homepage
-    } else {
-      alert('Please select a role.');
+
+    if(this.name != '' && this.email != '' && this.password != ''){
+      this.staffServer.registerStaff(
+        new RegisterReq(
+          this.name,
+          this.email,
+          this.password
+        )
+      ).subscribe(res => {
+        if(res.status){
+          if(res.role == StaffRole.ROLE_ADMIN){
+            this.authService.adminLogin();
+          }else if(res.role == StaffRole.ROLE_EMPLOYEE){
+            this.authService.login();
+          }
+        }else{
+          console.log(false)
+        }
+      })
     }
   }
 }

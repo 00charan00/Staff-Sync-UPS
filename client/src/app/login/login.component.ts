@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import {FormsModule} from '@angular/forms';
+import {RegisterReq, StaffRole} from '../model/register-req';
+import {StaffService} from '../service/staff.service';
+import {AboutComponent} from '../about/about.component';
+import {AuthService} from '../service/auth.service';
+import {LoginRegisterResponse} from '../model/login-register-response';
 
 @Component({
   selector: 'app-login',
@@ -15,28 +20,33 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  // Simulating user roles for demo purposes (replace with backend logic)
-  mockUsers = [
-    { email: 'admin@example.com', password: 'admin123', role: 'admin' },
-    { email: 'employee@example.com', password: 'employee123', role: 'employee' }
-  ];
-
-  constructor(private router: Router) {}
+  constructor(private router: Router,private staffServer:StaffService,private authService:AuthService) {}
 
   login() {
-    // Simulate user login with role-based routing
-    const user = this.mockUsers.find(
-      (u) => u.email === this.email && u.password === this.password
-    );
+    if(this.email != '' && this.password != ''){
+      this.staffServer.loginStaff(
+        new RegisterReq(
+          '',
+          this.email,
+          this.password
+        )
+      ).subscribe({
+        next : value => {
+          let role = value.role
+          if(value.status){
+            if(role == StaffRole.ROLE_EMPLOYEE){
+              this.authService.login();
+            }else if(role == StaffRole.ROLE_ADMIN){
+              this.authService.adminLogin()
+            }
+          }else{
+            console.log(value.msg)
+          }
+        },
+        error : err => {
 
-    if (user) {
-      if (user.role === 'admin') {
-        this.router.navigate(['/admin']); // Navigate to admin homepage
-      } else if (user.role === 'employee') {
-        this.router.navigate(['/employee']); // Navigate to employee homepage
-      }
-    } else {
-      alert('Invalid email or password.');
+        }
+      })
     }
   }
 }

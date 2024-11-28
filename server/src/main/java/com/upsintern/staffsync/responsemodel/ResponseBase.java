@@ -1,4 +1,4 @@
-package com.upsintern.staffsync;
+package com.upsintern.staffsync.responsemodel;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
