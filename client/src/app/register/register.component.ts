@@ -18,7 +18,7 @@ export class RegisterComponent {
   name: string = '';
   email: string = '';
   password: string = '';
-  role: string = 'employee'; // To capture admin/employee role selection
+  role: string = '';
 
   constructor(private router: Router,private staffServer:StaffService,private authService:AuthService) {}
 
