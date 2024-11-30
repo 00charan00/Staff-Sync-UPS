@@ -16,11 +16,13 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         req -> {
                             req.requestMatchers("/staff/del", "/staff/update").hasRole("ADMIN");
-                            req.requestMatchers("/staff/add","/staff/login","/event/addEvent").permitAll();
+                            req.requestMatchers("/event/**").authenticated();
+                            req.requestMatchers("/staff/add","/staff/login","/**").permitAll();
                         }
                 )
                 .build();

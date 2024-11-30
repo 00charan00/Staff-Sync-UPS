@@ -11,14 +11,16 @@ export class AuthService {
   constructor(private router: Router) {}
 
   // Call this method when the user successfully logs in
-  login(): void {
+  login(mail:string,pass:string): void {
     this.loggedIn = true;
-    this.router.navigate([''])
+    this.saveCredentials(mail, pass);
+    this.router.navigate(['']);
   }
 
-  adminLogin(){
+  adminLogin(mail:string,pass:string){
     this.loggedIn = true;
     this.isAdmin = true;
+    this.saveCredentials(mail, pass);
     this.router.navigate(['/admin'])
   }
   // Call this method when the user logs out
@@ -35,4 +37,9 @@ export class AuthService {
   isAdministrator():boolean{
     return this.isAdmin;
   }
+  saveCredentials(userName:string, password:string){
+    localStorage.setItem("username",userName);
+    localStorage.setItem("password",password);
+  }
+
 }
