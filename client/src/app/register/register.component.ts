@@ -33,9 +33,9 @@ export class RegisterComponent {
       ).subscribe(res => {
         if(res.status){
           if(res.role == StaffRole.ROLE_ADMIN){
-            this.authService.adminLogin();
+            this.authService.adminLogin(this.email,this.password);
           }else if(res.role == StaffRole.ROLE_EMPLOYEE){
-            this.authService.login();
+            this.authService.login(this.email,this.password);
           }
         }else{
           console.log(false)

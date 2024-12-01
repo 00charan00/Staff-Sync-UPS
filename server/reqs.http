@@ -23,14 +23,20 @@ Content-Type: application/json
 
 ### ADD EVENT
 POST http://localhost:8080/event/addEvent
+Authorization: Basic jessi@gmail.com jessi
 Content-Type: application/json
 
 {
-  "eventName": "eventName_fce6509262b4",
-  "eventVenue": "eventVenue_021fcf23a051",
-  "eventDate": "2024-11-28 22:38:36",
-  "eventDescription": "eventDescription_192f809d831f"
+  "eventName": "Jessi Birthday",
+  "eventVenue": "Porur",
+  "eventDate": "03-11-2024 03:35 AM",
+  "eventDescription": "jollya iruppom"
 }
+
+### Get Events
+GET http://localhost:8080/event/getEvent
+Authorization: Basic bineesh@gmail.com bineesh
+
 
 
 

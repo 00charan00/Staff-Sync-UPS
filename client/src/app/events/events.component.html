@@ -1,38 +1,40 @@
 <div class="events-page">
 
-    <div class="upcoming-events">
-        <h2>Upcoming Events</h2>
+  <div class="upcoming-events">
+    <h2>Upcoming Events</h2>
+
+    @if (events != null) {
+      @for (event of events; track event.eventId) {
         <div class="event-card">
-            <h3>Event Name: Team Building Workshop</h3>
-            <p><strong>Location:</strong> Office Conference Room</p>
-            <p><strong>Date & Time:</strong> Dec 5, 2024, 10:00 AM</p>
-            <p><strong>Description:</strong> A workshop designed to improve team collaboration and communication skills.</p>
+          <h3>Event Name: {{ event.eventName }}</h3>
+          <p><strong>Location:</strong> {{ event.eventVenue }}</p>
+          <p><strong>Date & Time:</strong> {{ event.eventDate | date:'dd/MM/yyyy HH:mm a'}} </p>
+          <p><strong>Description:</strong> {{ event.eventDescription }}</p>
         </div>
-        <div class="event-card">
-            <h3>Event Name: Annual General Meeting</h3>
-            <p><strong>Location:</strong> Headquarters</p>
-            <p><strong>Date & Time:</strong> Dec 20, 2024, 2:00 PM</p>
-            <p><strong>Description:</strong> Reviewing the year’s performance and planning the next year.</p>
-        </div>
-    </div>
+      }
+    } @else {
+        <h3 style="color: brown;font-style: italic">No Events</h3>
+    }
 
-    <!-- Add Event Section -->
-    <div class="add-event">
-        <h2>Add New Event</h2>
-        <form>
-            <label for="event-name">Event Name:</label>
-            <input id="event-name" type="text" placeholder="Enter event name" required />
+  </div>
 
-            <label for="location">Location:</label>
-            <input id="location" type="text" placeholder="Enter location" required />
+  <!-- Add Event Section -->
+  <div class="add-event">
+    <h2>Add New Event</h2>
+    <form [formGroup]="eventForm">
+      <label for="event-name">Event Name:</label>
+      <input id="event-name" type="text" placeholder="Enter event name" required [formControl]="eventForm.controls.eventName"/>
 
-            <label for="date-time">Date & Time:</label>
-            <input id="date-time" type="datetime-local" required />
+      <label for="location">Location:</label>
+      <input id="location" type="text" placeholder="Enter location" required [formControl]="eventForm.controls.eventLocation"/>
 
-            <label for="description">Description:</label>
-            <textarea id="description" rows="4" placeholder="Enter event description" required></textarea>
+      <label for="date-time">Date & Time:</label>
+      <input id="date-time" type="datetime-local" required [formControl]="eventForm.controls.eventDate" />
 
-            <button type="submit">Add Event</button>
-        </form>
-    </div>
+      <label for="description">Description:</label>
+      <textarea id="description" rows="4" placeholder="Enter event description" required [formControl]="eventForm.controls.eventDescription"></textarea>
+
+      <button type="submit" (click)="postEvent()">Add Event</button>
+    </form>
+  </div>
 </div>

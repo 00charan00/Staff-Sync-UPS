@@ -1,11 +1,13 @@
 package com.upsintern.staffsync.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.TimeZone;
 
 @Data
 @AllArgsConstructor
@@ -13,6 +15,7 @@ import java.util.Date;
 public class EventDto {
     String eventName;
     String eventVenue;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm a")
     Date eventDate;
     String eventDescription;
 }

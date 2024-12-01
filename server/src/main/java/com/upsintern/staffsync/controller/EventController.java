@@ -4,7 +4,9 @@ import com.upsintern.staffsync.dto.EventDto;
 import com.upsintern.staffsync.entity.Event;
 import com.upsintern.staffsync.responsemodel.ResponseBase;
 import com.upsintern.staffsync.service.EventService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("event")
+@CrossOrigin
 public class EventController {
 
     @Autowired
@@ -24,7 +27,7 @@ public class EventController {
     }
 
     @GetMapping("getEvent")
-    public ResponseEntity<List<Event>> getEvent(@RequestBody EventDto eventDto){
+    public ResponseEntity<List<Event>> getEvent(){
         return ResponseEntity.ok(eventService.getAllEvent());
     }
 

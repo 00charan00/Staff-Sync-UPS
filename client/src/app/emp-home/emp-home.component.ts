@@ -7,7 +7,6 @@ import {EventsComponent} from '../events/events.component';
   templateUrl: './emp-home.component.html',
   imports: [
     RouterLink,
-    EventsComponent
   ],
   styleUrls: ['./emp-home.component.css']
 })
