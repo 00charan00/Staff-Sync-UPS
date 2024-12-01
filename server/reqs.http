@@ -3,9 +3,9 @@ POST http://localhost:8080/staff/add
 Content-Type: application/json
 
 {
-  "staffName": "Charan",
-  "staffEmail": "Charan@gmail.com",
-  "staffPass": "Charan"
+  "staffName": "Jessi",
+  "staffEmail": "jessi@gmail.com",
+  "staffPass": "jessi"
 }
 
 ### delete staff
@@ -27,16 +27,30 @@ Authorization: Basic jessi@gmail.com jessi
 Content-Type: application/json
 
 {
-  "eventName": "Jessi Birthday",
+  "eventName": "Mine Birthday",
   "eventVenue": "Porur",
-  "eventDate": "03-11-2024 03:35 AM",
+  "eventDate": "05-12-2024 03:35 AM",
   "eventDescription": "jollya iruppom"
 }
 
 ### Get Events
 GET http://localhost:8080/event/getEvent
-Authorization: Basic bineesh@gmail.com bineesh
+Authorization: Basic jessi@gmail.com jessi
 
 
 
 
+### create meeting
+POST http://localhost:8080/meet/create
+Authorization: Basic jessi@gmail.com jessi
+Content-Type: application/json
+
+{
+  "meetingName": "Meeting2",
+  "meetingDescription": "meetingDescription_955156c09c8d",
+  "empIdList": [
+    "empIdList_576dbecd2a4f"
+  ],
+  "meetingDateTime": "2024-12-20 09:09 PM",
+  "meetingOwner": "Charan"
+}
