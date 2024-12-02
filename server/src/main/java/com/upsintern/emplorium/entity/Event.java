@@ -3,11 +3,10 @@ package com.upsintern.emplorium.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -20,7 +19,7 @@ public class Event {
     String eventId;
     String eventName;
     String eventVenue;
-    @Temporal(TemporalType.TIMESTAMP) // Ensures correct mapping to DATETIME in DB
+    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm a")
     private Date eventDate;
     String eventDescription;
 }

@@ -8,7 +8,9 @@ export class AuthService {
   private loggedIn: boolean = false;
   private isAdmin: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    this.loggedIn = (localStorage.getItem("username") != null && localStorage.getItem("password") != null)
+  }
 
   // Call this method when the user successfully logs in
   login(mail:string,pass:string): void {
