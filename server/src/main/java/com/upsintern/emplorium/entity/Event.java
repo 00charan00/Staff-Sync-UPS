@@ -3,6 +3,8 @@ package com.upsintern.emplorium.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +20,7 @@ public class Event {
     String eventId;
     String eventName;
     String eventVenue;
-    Date eventDate;
+    @Temporal(TemporalType.TIMESTAMP) // Ensures correct mapping to DATETIME in DB
+    private Date eventDate;
     String eventDescription;
 }

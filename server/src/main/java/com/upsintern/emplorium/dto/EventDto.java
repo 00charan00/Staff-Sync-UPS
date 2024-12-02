@@ -14,7 +14,8 @@ import java.util.Date;
 public class EventDto {
     String eventName;
     String eventVenue;
-    @JsonFormat(pattern = "dd-MM-yyyy HH:mm a")
-    Date eventDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm a")
+    private Date eventDate;
+
     String eventDescription;
 }

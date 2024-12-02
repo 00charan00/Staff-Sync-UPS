@@ -46,11 +46,18 @@ Authorization: Basic jessi@gmail.com jessi
 Content-Type: application/json
 
 {
-  "meetingName": "Meeting2",
-  "meetingDescription": "meetingDescription_955156c09c8d",
+  "meetingName": "Saran Raj Bday",
+  "meetingDescription": "Treat",
   "empIdList": [
     "empIdList_576dbecd2a4f"
   ],
-  "meetingDateTime": "2024-12-20 09:09 PM",
+  "meetingDateTime": "2025-10-10 09:09 PM",
   "meetingOwner": "Charan"
 }
+
+
+### cancel meetimg
+
+POST http://localhost:8080/meet/cancel?meetingId=Meeting:d0bc1edf-adbe-46ab-ad97-1dab6751f188
+Authorization: Basic jessi@gmail.com jessi
+Content-Type: application/json

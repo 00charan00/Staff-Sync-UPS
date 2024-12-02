@@ -48,11 +48,14 @@ export class EventsComponent implements OnInit{
       location != null && location != '' &&
       date != null && desc != null && desc != ''){
       let formattedDate = this.datePipe.transform(date,"dd-MM-yyyy HH:mm a");
+      console.log("Formatted Date:", formattedDate);
+
       if(formattedDate!= null)date = new Date(formattedDate);
         let event = new EventDto(name,location,date,desc);
         this.eventService.postEvent(event).subscribe(
           res => {
             console.log(res);
+
           }
         )
 
