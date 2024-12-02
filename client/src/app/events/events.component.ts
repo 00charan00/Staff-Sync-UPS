@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {EventsService} from '../service/events.service';
 import {Events} from '../model/event';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DatePipe} from '@angular/common';
+import {DatePipe, formatDate} from '@angular/common';
 import {EventDto} from '../model/event-dto';
 
 
@@ -27,7 +27,7 @@ export class EventsComponent implements OnInit{
     eventDescription: new FormControl(''),
   })
 
-  constructor(private eventService:EventsService, private datePipe:DatePipe) {
+  constructor(private eventService:EventsService) {
   }
 
   ngOnInit(): void {
@@ -43,19 +43,14 @@ export class EventsComponent implements OnInit{
     let location = this.eventForm.controls.eventLocation.value
     let date = this.eventForm.controls.eventDate.value
     let desc = this.eventForm.controls.eventDescription.value
-    console.log(date);
     if(name != null && name != '' &&
       location != null && location != '' &&
       date != null && desc != null && desc != ''){
-      let formattedDate = this.datePipe.transform(date,"dd-MM-yyyy HH:mm a");
-      console.log("Formatted Date:", formattedDate);
-
-      if(formattedDate!= null)date = new Date(formattedDate);
-        let event = new EventDto(name,location,date,desc);
+      let formattedDate = formatDate(date,"dd-MM-yyyy HH:mm a","en-US")
+        let event = new EventDto(name,location,formattedDate,desc);
         this.eventService.postEvent(event).subscribe(
           res => {
             console.log(res);
-
           }
         )
 
